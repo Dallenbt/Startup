@@ -23,13 +23,16 @@ We all get hangry sometimes, but we rarely have an outlet for it. That’s where
 
 ![Design image](BiteFight.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Here is a sequence diagram to show how users and the backend interact
 
 ```mermaid
 sequenceDiagram
-    actor You
-    actor Website
-    You->>Website: Replace this with your design
+    actor Seoul
+    actor Dublin
+    Seoul->>Server: Vote for Steak
+    Server -->>Dublin: Seoul voted for Steak
+    Dublin->>Server: Vote for Sushi
+    Server -->>Seoul: Dublin voted for Sushi
 ```
 
 ### Key features
