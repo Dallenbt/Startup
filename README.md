@@ -2,7 +2,7 @@
 
 [My Notes](notes.md)
 
-You will log in to my game, and then two food items will be presented for you to vote on, along with anyone else currently on the website. The snack that gets the most votes in the time the voting is active will win, and the next round of voting will start with two new food items
+You will log in to my game, and then two food items will be presented for you to vote on, along with anyone else currently on the website. The snack that gets the most votes in the time the voting is active will win, and the next round of voting will start with two new food items. You will be able to look at past results to see how your favorite foods have done.
 
 ## 🚀 Specification Deliverable
 
