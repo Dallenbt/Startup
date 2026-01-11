@@ -1,4 +1,4 @@
-# FoodBattle
+# BiteFight
 
 [My Notes](notes.md)
 
@@ -17,7 +17,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ### Elevator pitch
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+We all get hangry sometimes, but we rarely have an outlet for it. That’s where BiteFight comes in. BiteFight lets users log in and vote on the foods they’re craving right now, turning hunger into friendly competition. Watch votes update live, argue over food loyalties, and distract yourself just long enough to make it to dinner.
 
 ### Design
 
@@ -34,9 +34,10 @@ sequenceDiagram
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- Food poll voting
+- Results are stored
+- Secure login
+- Allows users to see what others are voting for
 
 ### Technologies
 
