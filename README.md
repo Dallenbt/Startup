@@ -42,12 +42,12 @@ sequenceDiagram
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - Use HTML for the webpages, have links to go around the site, a main page to log in, and one for voting
+- **CSS** - Style the website to look nice and easy to understand 
+- **React** - Applies the votes, and can be used to let people log in
+- **Service** - User logins, registrations, and logouts, creating the polls, and getting the voting results
+- **DB/Login** - store the users, polls, and final results
+- **WebSocket** - letting people know when voting starts and what others are voting for
 
 ## 🚀 AWS deliverable
 
