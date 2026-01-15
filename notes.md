@@ -10,7 +10,7 @@
 
 ## AWS
 
-My IP address is: 3.209.153.172
+My IP address is: 3.209.153.172 my domain name is bitefight.click
 
 
 ## Caddy
