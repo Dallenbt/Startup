@@ -9,7 +9,7 @@ body{
 }
 main{
     text-align: center;
-    height: 60vh;
+    height: 55vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,7 +17,7 @@ main{
     gap: 20px;
 }
 header{
-    height: 20vh;
+    height: 25vh;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -45,7 +45,8 @@ ul{
     flex-direction: row;
 }
 .banner{
-    
+    font-family:"Rubik Wet Paint", cursive;
+    font-size: 7rem;
 }
 hr{
     width: 100%;
