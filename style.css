@@ -77,19 +77,22 @@ hr{
   margin-top: 0.75rem;
   padding-top: 0.5rem;
   border-top: 1px solid #eee;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   font-size: 0.85rem;
 }
 .winner-label {
   font-weight: 600;
   color: #2e7d32;
 }
-.food.winner {
+.winner {
   background: #173a23;
   border-radius: 10px;
   padding: 0.5rem;
+}
+.vs {
+  font-weight: bold;
+  color: #900a0a;
+  font-size: 1.5rem;
 }
