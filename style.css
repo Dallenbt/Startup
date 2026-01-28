@@ -56,7 +56,7 @@ ul{
 hr{
     width: 100%;
     border: 1px solid rgb(0, 0, 0);
-    height: 5%;
+    height: 3%;
 }
 
 /* Results Page Styles */
@@ -65,7 +65,8 @@ hr{
   margin: 0 auto;
   padding: 0 1rem 2rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 3fr));
+  grid-auto-rows: auto;
   gap: 1.25rem;
 }
 .result-card {
@@ -132,4 +133,8 @@ hr{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.voter {
+    margin-top: 1rem;
 }
