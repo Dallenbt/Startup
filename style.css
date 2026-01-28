@@ -12,6 +12,7 @@ body{
     flex-direction: column;
 }
 main{
+    position: relative;
     text-align: center;
     flex: 50vh 0 1;
     display: flex;
@@ -145,4 +146,12 @@ hr{
 
 .voter {
     margin-top: 1rem;
+}
+
+.notif{
+    position:absolute;
+    top: 0;
+    right: 0;
+    margin: 1rem;
+    padding: 0.5rem 1rem;
 }
