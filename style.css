@@ -1,0 +1,39 @@
+#join{
+    font-weight: bold;
+    background-color: white;
+}
+body{
+    background-color: rgb(92, 91, 91);
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+main{
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+header{
+    height: 20vh;
+}
+footer{
+    height: 10vh;
+}
+a{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    
+}
+a:hover{
+    text-decoration: underline;
+    color:black
+}
+ul{
+    list-style: none;
+    padding: 0;
+}
