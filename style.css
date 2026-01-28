@@ -9,12 +9,13 @@ body{
 }
 main{
     text-align: center;
-    height: 55vh;
+    flex:1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 20px;
+
 }
 header{
     height: 25vh;
@@ -52,4 +53,43 @@ hr{
     width: 100%;
     border: 1px solid rgb(0, 0, 0);
     height: 5%;
+}
+.results {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+.result-card {
+  background: #000000;
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.result-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.1);
+}
+.card-footer {
+  margin-top: 0.75rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #eee;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  font-size: 0.85rem;
+}
+.winner-label {
+  font-weight: 600;
+  color: #2e7d32;
+}
+.food.winner {
+  background: #173a23;
+  border-radius: 10px;
+  padding: 0.5rem;
 }

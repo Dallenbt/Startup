@@ -26,36 +26,63 @@
     
     <main>
         <h1>Take a look at past results</h1>
-        <table>
-        <thead>
-            <tr>
-            <th>Fighter1</th>
-            <th>Fighter2</th>
-            <th>Winner</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Sushi</td>
-            <td>Steak</td>
-            <td>Sushi</td>
-            <td>April 20, 2025</td>
-          </tr>
-          <tr>
-            <td>Corndog</td>
-            <td>Hotdog</td>
-            <td>Corndog</td>
-            <td>June 12, 2025</td>
-          </tr>
-          <tr>
-            <td>Brownies</td>
-            <td>Cake</td>
-            <td>Cake</td>
-            <td>April 3, 2025</td>
-          </tr>
-        </tbody>
-      </table>
+     <main class="results">
+
+    <!-- Result Card -->
+    <article class="result-card winner-left">
+      <div class="matchup">
+        <div class="food winner">
+          <h2>🍕 Pizza</h2>
+          <span class="percent">62%</span>
+          <div class="bar">
+            <div class="fill" style="width: 62%"></div>
+          </div>
+          <span>310 votes</span>
+        </div>
+
+        <div class="vs">vs</div>
+
+        <div class="food">
+          <h2>🌮 Tacos</h2>
+          <span class="percent">38%</span>
+          <div class="bar">
+            <div class="fill" style="width: 38%"></div>
+          </div>
+          <span>190 votes</span>
+        </div>
+      </div>
+      <footer class="card-footer">
+        <span class="winner-label">🏆 Winner: Pizza</span>
+        <time datetime="2026-01-26">Jan 26, 2026</time>
+      </footer>
+    </article>
+    <article class="result-card winner-right">
+      <div class="matchup">
+        <div class="food">
+          <h2>🍔 Burger</h2>
+          <span class="percent">45%</span>
+          <div class="bar">
+            <div class="fill" style="width: 45%"></div>
+          </div>
+          <span>225 votes</span>
+        </div>
+
+        <div class="vs">vs</div>
+
+        <div class="food winner">
+          <h2>🍣 Sushi</h2>
+          <span class="percent">55%</span>
+          <div class="bar">
+            <div class="fill" style="width: 55%"></div>
+          </div>
+          <span>275 votes</span>
+        </div>
+      </div>
+      <footer class="card-footer">
+        <span class="winner-label">🏆 Winner: Sushi</span>
+        <time datetime="2026-01-25">Jan 25, 2026</time>
+      </footer>
+    </article>
     </main>
 
     <footer>
