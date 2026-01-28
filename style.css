@@ -54,6 +54,8 @@ hr{
     border: 1px solid rgb(0, 0, 0);
     height: 5%;
 }
+
+/* Results Page Styles */
 .results {
   max-width: 900px;
   margin: 0 auto;
@@ -96,3 +98,7 @@ hr{
   color: #900a0a;
   font-size: 1.5rem;
 }
+
+/* End of Results Page Styles */
+
+/* Play Page Styles */
