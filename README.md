@@ -63,15 +63,15 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [x] **HTML pages** - I did not complete this part of the deliverable.
-- [x] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [x] **Links** - I did not complete this part of the deliverable.
-- [x] **Text** - I did not complete this part of the deliverable.
-- [x] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [x] **Images** - I did not complete this part of the deliverable.
-- [x] **Login placeholder** - I did not complete this part of the deliverable.
-- [x] **DB data placeholder** - I did not complete this part of the deliverable.
-- [x] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - I made three HTML pages for my website
+- [x] **Proper HTML element usage** - I used headers, footers, and various other tags to create the structure of my website
+- [x] **Links** - I have links that take you between the three pages of my website
+- [x] **Text** - The name of my website is displayed, and I have text on each page to help users know what to do 
+- [x] **3rd party API placeholder** - I will use this to have a list of food to vote on 
+- [x] **Images** - I have pictures of the foods that people will be voting on
+- [x] **Login placeholder** - The home page has a place for users to input a name and log in to the website
+- [x] **DB data placeholder** - I have a previous results page that will use this to show past votes
+- [x] **WebSocket placeholder** - When other people vote, users will get a notification 
 
 ## 🚀 CSS deliverable
 
