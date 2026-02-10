@@ -77,12 +77,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Visually appealing colors and layout. No overflowing elements.** - I did not complete this part of the deliverable.
-- [ ] **Use of a CSS framework** - I did not complete this part of the deliverable.
-- [ ] **All visual elements styled using CSS** - I did not complete this part of the deliverable.
-- [ ] **Responsive to window resizing using flexbox and/or grid display** - I did not complete this part of the deliverable.
-- [ ] **Use of a imported font** - I did not complete this part of the deliverable.
-- [ ] **Use of different types of selectors including element, class, ID, and pseudo selectors** - I did not complete this part of the deliverable.
+- [x] **Visually appealing colors and layout. No overflowing elements.** - I made the whole website have the same style and ensured that everything was displayed the way I wanted it  
+- [x] **Use of a CSS framework** - I used the Bootstrap framework to style my buttons and my notifications 
+- [x] **All visual elements styled using CSS** - I changed the look of all of my text and styled all of my elements to enhance the look of my website
+- [x] **Responsive to window resizing using flexbox and/or grid display** - I used grid for my past results page and flex for my playing page to make sure that the elements always fit on the screen
+- [x] **Use of a imported font** - I imported two fonts Rubik wet paint and Fredoka
+- [x] **Use of different types of selectors including element, class, ID, and pseudo selectors** - I used all of these to change the look of my website, using the element to change all instances and the more specific ones to change only the few I wanted to style
 
 ## 🚀 React part 1: Routing deliverable
 
