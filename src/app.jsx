@@ -1,23 +1,35 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
+import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { Login } from './login/login';
+import { Play } from './play/play';
+import { Results } from './results/results';
+
 
 export default function App() {
-  return <div className="body bg-dark text-light">
+  return (
+  <BrowserRouter>
+  <div className="body bg-dark text-light">
         <header>
             <h1 className="banner">BiteFight</h1>
             <nav>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="play.html">Play</a></li>
-                    <li><a href="results.html">Results</a></li>
+                    <li><NavLink to="/">Home</NavLink></li>
+                    <li><NavLink to="/play">Play</NavLink></li>
+                    <li><NavLink to="/results">Results</NavLink></li>
                 </ul>
             </nav>
         </header>
         <hr/>
         
         <main>
-            <p>componet here</p>
+            <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/play" element={<Play />} />
+                <Route path="/results" element={<Results />} />
+                <Route path="*" element={<div className="text-center">Page Not Found</div>} />
+            </Routes>
         </main>
 
         <footer>
@@ -26,5 +38,7 @@ export default function App() {
         <br />
         <a href="https://github.com/Dallenbt/Startup" target="_blank">GitHub</a>
         </footer>
-    </div>;
+    </div>
+    </BrowserRouter>
+    );
 }

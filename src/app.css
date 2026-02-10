@@ -5,11 +5,12 @@
 #join{
     font-weight: bold;
 }
-body{
+.body{
     background-color: rgba(8, 4, 33, 0.623);
     color: white;
     display: flex;
     flex-direction: column;
+    height: 100vh;
 }
 main{
     position: relative;
