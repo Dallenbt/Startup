@@ -15,7 +15,7 @@
 main{
     position: relative;
     text-align: center;
-    flex: 50vh 0 1;
+    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -24,15 +24,23 @@ main{
 
 }
 header{
-    height: 25vh;
+    
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    background-color: #531923;
+    border-bottom: #eee solid 1px;
+    
 
 }
 footer{
-    height: 10vh;
+    
+    background-color: #531923;
+    justify-content: center;
+    border-top:#eee solid 1px;
+    margin-top:auto;
+    
 }
 a{
     color: white;
@@ -56,11 +64,7 @@ ul{
     font-size: 7rem;
     margin-top: 1rem;
 }
-hr{
-    width: 100%;
-    border: 1px solid rgb(0, 0, 0);
-    height: 3%;
-}
+
 
 /* Results Page Styles */
 .results {

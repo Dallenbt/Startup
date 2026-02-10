@@ -21,7 +21,7 @@ export default function App() {
                 </ul>
             </nav>
         </header>
-        <hr/>
+        
         
         <main>
             <Routes>
@@ -33,7 +33,6 @@ export default function App() {
         </main>
 
         <footer>
-        <hr />
         <span>Dallen Thompson</span>
         <br />
         <a href="https://github.com/Dallenbt/Startup" target="_blank">GitHub</a>
