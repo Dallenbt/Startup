@@ -68,6 +68,9 @@ ul{
 
 
 /* Results Page Styles */
+.results-page {
+  display: inline;
+}
 .results {
   width: 100%;
   padding: 0 1rem 2rem;

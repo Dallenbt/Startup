@@ -1,9 +1,10 @@
 import React from 'react';
-import './results.css'
+import styles from './results.module.css';
+
 
 export function Results() {
   return (
-    <main>
+    <main className={styles.resultsPage}>
         <h1>Take a look at past results</h1>
      <main className="results">
 
