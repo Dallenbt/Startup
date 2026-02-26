@@ -6,29 +6,43 @@ export function Play({user}) {
   const [food2, setFood2] = React.useState('');
   const [vote1, setVote1] = React.useState(0);
   const [vote2, setVote2] = React.useState(0);
+  const [timeLeft, setTimeLeft] = React.useState(20);
 
-  
   if (!user) {
     user = {Name: 'Guest'};
   }
 
-  React.useEffect(() => {
-    async function fetchFood() {
-      const randomFood1 = await getRandomFood();
-      const randomFood2 = await getRandomFood();
-      setFood1(randomFood1);
-      setFood2(randomFood2);
-    }
+  async function fetchFoodPair() {
+    const randomFood1 = await getRandomFood();
+    const randomFood2 = await getRandomFood();
+    setFood1(randomFood1);
+    setFood2(randomFood2);
+  }
 
-    fetchFood();
+  React.useEffect(() => {
+    fetchFoodPair();
   }, []);
 
-  
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(prev => {
+        if (prev <= 1) {
+          setVote1(0);
+          setVote2(0);
+          fetchFoodPair();
+          return 20;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <main>
         <h1>Time to Fight!</h1>
-        <h1>Time left to vote: 10</h1>
+        <h1>Time left to vote: {timeLeft}</h1>
         <p className = "alert alert-info notif" > {user.Name} voted for {food1}</p>
         <main className="play-main">
         <article className ="food-card">
