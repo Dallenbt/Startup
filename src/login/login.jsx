@@ -18,7 +18,7 @@ export function Login({setUser}) {
       <form>
         <div>
           <span>Name</span>
-          <input type="text" placeholder="Your name" value={Name} onChange={(e) => setName(e.target.value)} />
+          <input type="text" placeholder="Your name"  onChange={(e) => setName(e.target.value)} />
         </div>
         <button type="button" className="btn btn-dark" id="join" onClick={loginUser}>Join the fight</button>
       </form>

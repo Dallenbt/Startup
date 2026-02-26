@@ -11,6 +11,7 @@ export function serviceLoginUser(Name) {
 
     if (user) {
         console.log('Login successful');
+        console.log(user);
     } else {
         console.log('Login failed');
     }
