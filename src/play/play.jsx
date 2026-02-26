@@ -1,13 +1,13 @@
 import React from 'react';
 
-export function Play() {
+export function Play({user}) {
 
   
 
   return (
     <main>
         <h1>Time to Fight!</h1>
-        <p className = "alert alert-info notif" >{User.Name} voted for Corndog</p>
+        <p className = "alert alert-info notif" > {user} voted for Corndog</p>
         <main className="play-main">
         <article className ="food-card">
         <h3>Corndog</h3>

@@ -15,7 +15,7 @@ export function Login({setUser}) {
   return (
     <main>
         <h1>Welcome to BiteFight {Name}!</h1>
-      <form method="get" action="play.html">
+      <form>
         <div>
           <span>Name</span>
           <input type="text" placeholder="Your name" value={Name} onChange={(e) => setName(e.target.value)} />

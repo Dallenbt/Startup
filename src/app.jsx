@@ -8,6 +8,8 @@ import { Results } from './results/results';
 
 
 export default function App() {
+    const [user, setUser] = React.useState(null);
+
   return (
   <BrowserRouter>
   <div className="body bg-dark text-light">
@@ -25,9 +27,9 @@ export default function App() {
         
         <main>
             <Routes>
-                <Route path="/" element={<Login />} />
-                <Route path="/play" element={<Play />} />
-                <Route path="/results" element={<Results />} />
+                <Route path="/" element={<Login setUser={setUser}/>} />
+                <Route path="/play" element={<Play user={user} />} />
+                <Route path="/results" element={<Results user={user} />} />
                 <Route path="*" element={<div className="text-center">Page Not Found</div>} />
             </Routes>
         </main>
