@@ -1,15 +1,26 @@
 import React from 'react';
+import {serviceLoginUser} from '../service';
 
-export function Login() {
+export function Login({setUser}) {
+
+  const [Name, setName] = React.useState('');
+
+  function loginUser() {
+      setUser(serviceLoginUser(Name));
+    }
+
+
+
+
   return (
     <main>
-        <h1>Welcome to BiteFight</h1>
+        <h1>Welcome to BiteFight {Name}!</h1>
       <form method="get" action="play.html">
         <div>
           <span>Name</span>
-          <input type="text" placeholder="Your name" />
+          <input type="text" placeholder="Your name" value={Name} onChange={(e) => setName(e.target.value)} />
         </div>
-        <button type="submit" className="btn btn-dark" id="join">Join the fight</button>
+        <button type="button" className="btn btn-dark" id="join" onClick={loginUser}>Join the fight</button>
       </form>
     </main>
   );
