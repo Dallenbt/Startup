@@ -31,7 +31,6 @@ export function Play({user}) {
     const timer = setInterval(() => {
       setTimeLeft(prev => {
         if (prev <= 1) {
-          // time is up – determine the winner/loser and record the result
           if (vote1 > vote2 && vote1 > 0) {
             setWinner(food1);
             setLoser(food2);
@@ -41,12 +40,12 @@ export function Play({user}) {
             setLoser(food1);
             serviceGame(food1, food2, vote1, vote2);
           } else {
-            // tie or no votes
+            
             setWinner('');
             setLoser('');
           }
 
-          // reset for next round
+          
           setVote1(0);
           setVote2(0);
           fetchFoodPair();
@@ -59,8 +58,6 @@ export function Play({user}) {
     return () => clearInterval(timer);
   }, [vote1, vote2, food1, food2]);
 
-  // winner/loser is now handled when the timer expires, so the
-  // previous effect that listened for vote changes is no longer needed.
 
   
 
