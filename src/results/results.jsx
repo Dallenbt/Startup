@@ -15,18 +15,18 @@ export function Results({games}) {
     {games.map((game, index) => (
       <article key={index} className="result-card">
         <div>
-          <div className="winner">
+          <div className={game.winner === game.food1 ? "winner" : ""}>
             <h2>{game.food1}</h2>
             <span>{(game.vote1 / (game.vote1 + game.vote2) * 100).toFixed(0)}%</span>
           <div></div>
-          <span>{game.vote1 + game.vote2} votes</span>
+          <span>{game.vote1} votes</span>
         </div>
         <div className="vs">vs</div>
-        <div>
+        <div className={game.winner === game.food2 ? "winner" : ""}>
           <h2>{game.food2}</h2>
           <span>{(game.vote2 / (game.vote1 + game.vote2) * 100).toFixed(0)}%</span>
           <div></div>
-          <span>{game.vote1 + game.vote2} votes</span>
+          <span>{game.vote2} votes</span>
         </div>
       </div>
       <div className="card-footer">
