@@ -31,6 +31,22 @@ export function Play({user}) {
     const timer = setInterval(() => {
       setTimeLeft(prev => {
         if (prev <= 1) {
+          // time is up – determine the winner/loser and record the result
+          if (vote1 > vote2 && vote1 > 0) {
+            setWinner(food1);
+            setLoser(food2);
+            serviceGame(food1, food2, vote1, vote2);
+          } else if (vote2 > vote1 && vote2 > 0) {
+            setWinner(food2);
+            setLoser(food1);
+            serviceGame(food1, food2, vote1, vote2);
+          } else {
+            // tie or no votes
+            setWinner('');
+            setLoser('');
+          }
+
+          // reset for next round
           setVote1(0);
           setVote2(0);
           fetchFoodPair();
@@ -41,26 +57,17 @@ export function Play({user}) {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [vote1, vote2, food1, food2]);
 
-  React.useEffect(() => {
-    if (vote1 > vote2 && vote1 > 0) {
-      setWinner(food1);
-      setLoser(food2);
-      serviceGame(food1, food2, vote1, vote2);
-    } else if (vote2 > vote1 && vote2 > 0) {
-      setWinner(food2);
-      setLoser(food1);
-      serviceGame(food1, food2, vote1, vote2);
-    }
-  }, [vote1, vote2]);
+  // winner/loser is now handled when the timer expires, so the
+  // previous effect that listened for vote changes is no longer needed.
 
   
 
   return (
     <main>
         <h1>Time to Fight!</h1>
-        <p className="alert alert-success notif">Winner: {winner}</p>
+        <p className="alert alert-success notif">Last Winner: {winner}</p>
         <h1>Time left to vote: {timeLeft}</h1>
         <p className = "alert alert-info notif" >{notification}</p>
         <main className="play-main">
