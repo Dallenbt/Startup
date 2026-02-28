@@ -7,7 +7,7 @@ export function Play({user, setGames}) {
   const [food2, setFood2] = React.useState('');
   const [vote1, setVote1] = React.useState(0);
   const [vote2, setVote2] = React.useState(0);
-  const [timeLeft, setTimeLeft] = React.useState(10);
+  const [timeLeft, setTimeLeft] = React.useState(30);
   const [notification, setNotification] = React.useState('');
   const [winner, setWinner] = React.useState('');
   const [loser, setLoser] = React.useState('');
@@ -49,7 +49,7 @@ export function Play({user, setGames}) {
           setVote1(0);
           setVote2(0);
           fetchFoodPair();
-          return 10;
+          return 30;
         }
         return prev - 1;
       });
