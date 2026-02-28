@@ -46,4 +46,11 @@ export function serviceGame(food1, food2, vote1, vote2) {
     games.push(game);
     localStorage.setItem('games', JSON.stringify(games));
     console.log('Game recorded:', game);
+    
+    return games;
+}
+
+
+export function getGames() {
+    return JSON.parse((localStorage.getItem('games') || '[]'));
 }

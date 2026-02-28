@@ -5,16 +5,15 @@ import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Login } from './login/login';
 import { Play } from './play/play';
 import { Results } from './results/results';
+import { getGames } from './service';
 
 
 export default function App() {
     const [user, setUser] = React.useState(null);
-    const [games, setGames] = React.useState([]);
+    
+    const [games, setGames] = React.useState(() => getGames());
 
-    React.useEffect(() => {
-        const storedGames = JSON.parse(localStorage.getItem('games') || '[]');
-        setGames(storedGames);
-    }, []);
+    
 
   return (
   <BrowserRouter>
@@ -34,7 +33,7 @@ export default function App() {
         <main>
             <Routes>
                 <Route path="/" element={<Login setUser={setUser}/>} />
-                <Route path="/play" element={<Play user={user} />} />
+                <Route path="/play" element={<Play user={user} setGames={setGames} />} />
                 <Route path="/results" element={<Results user={user} games={games} />} />
                 <Route path="*" element={<div className="text-center">Page Not Found</div>} />
             </Routes>

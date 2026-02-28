@@ -2,10 +2,17 @@ import React from 'react';
 import styles from './results.module.css';
 
 
-export function Results({games}) {
-  console.log('Games data:', games);
+import { getGames } from '../service';
 
+export function Results({games: propGames}) {
   
+  const [games, setGames] = React.useState(propGames);
+
+  console.log('Games data (props):', propGames);
+
+  React.useEffect(() => {
+    setGames(getGames());
+  }, [propGames]);
 
   return (
     <main className={styles.resultsPage}>
