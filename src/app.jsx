@@ -9,6 +9,12 @@ import { Results } from './results/results';
 
 export default function App() {
     const [user, setUser] = React.useState(null);
+    const [games, setGames] = React.useState([]);
+
+    React.useEffect(() => {
+        const storedGames = JSON.parse(localStorage.getItem('games') || '[]');
+        setGames(storedGames);
+    }, []);
 
   return (
   <BrowserRouter>
@@ -29,7 +35,7 @@ export default function App() {
             <Routes>
                 <Route path="/" element={<Login setUser={setUser}/>} />
                 <Route path="/play" element={<Play user={user} />} />
-                <Route path="/results" element={<Results user={user} />} />
+                <Route path="/results" element={<Results user={user} games={games} />} />
                 <Route path="*" element={<div className="text-center">Page Not Found</div>} />
             </Routes>
         </main>
