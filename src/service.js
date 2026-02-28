@@ -37,3 +37,13 @@ export function serviceLoginUser(Name) {
         console.log('Login failed');
     }
 }
+
+
+export function serviceGame(food1, food2, vote1, vote2) {
+    const games = JSON.parse((localStorage.getItem('games') || '[]'));
+    const winner = vote1 > vote2 ? food1 : food2;
+    const game = {food1, food2, vote1, vote2, winner, date: new Date().toISOString()};
+    games.push(game);
+    localStorage.setItem('games', JSON.stringify(games));
+    console.log('Game recorded:', game);
+}

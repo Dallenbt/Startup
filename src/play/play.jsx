@@ -1,5 +1,6 @@
 import React from 'react';
 import { getRandomFood } from '../service';
+import {serviceGame} from '../service';
 
 export function Play({user}) {
   const [food1, setFood1] = React.useState('');
@@ -46,9 +47,11 @@ export function Play({user}) {
     if (vote1 > vote2 && vote1 > 0) {
       setWinner(food1);
       setLoser(food2);
+      serviceGame(food1, food2, vote1, vote2);
     } else if (vote2 > vote1 && vote2 > 0) {
       setWinner(food2);
       setLoser(food1);
+      serviceGame(food1, food2, vote1, vote2);
     }
   }, [vote1, vote2]);
 
