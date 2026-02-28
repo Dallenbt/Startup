@@ -96,8 +96,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [x] **All functionality implemented or mocked out** - I made the voting work as well as updating and storing the games. I also added a way for people to input their names when they log in. Put a placeholder for my websocket notifications that shows the last winner and what the last person voted for.
+- [x] **Hooks** - I used a bunch of different useState() and useEffect() hooks to make my webstite react.
 
 ## 🚀 Service deliverable
 
