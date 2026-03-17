@@ -2,7 +2,7 @@ import React from 'react';
 import {serviceLoginUser} from '../service';
 import {MessageDialog} from './messageDialog';
 
-export function Login({setUser}) {
+export function Unauthenticated({setUser}) {
 
   const [Name, setName] = React.useState('');
   const [password, setPassword] = React.useState('');
