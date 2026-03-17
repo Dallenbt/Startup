@@ -16,7 +16,10 @@ export function Results({games: propGames}) {
 
 
   async function getGamesData() {
-    games = await getGames();
+    games = await fetch('/api/score', {
+      method: 'GET',
+      credentials: 'include',
+    }).then((response) => response.json());
     setGames(games);
   }
 
