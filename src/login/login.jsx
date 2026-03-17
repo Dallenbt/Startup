@@ -1,10 +1,13 @@
 import React from 'react';
 import {serviceLoginUser} from '../service';
+import {MessageDialog} from './messageDialog';
 
 export function Login({setUser}) {
 
   const [Name, setName] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [displayError, setDisplayError] = React.useState(null);
+
   async function loginUser() {
     loginOrCreate(`/api/auth/login`);
   }
@@ -48,6 +51,7 @@ export function Login({setUser}) {
         <button type="button" className="btn btn-dark" id="join" onClick={loginUser}>Login</button>
         <button type="button" className="btn btn-dark" id="join" onClick={createUser}>Create Account</button>
       </form>
+      <MessageDialog message={displayError} onHide={() => setDisplayError(null)} />
     </main>
   );
 }
