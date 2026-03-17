@@ -12,10 +12,20 @@ import { AuthState } from './login/authState';
 export default function App() {
     const [user, setUser] = React.useState(null);
     const [games, setGames] = React.useState(() => getGames());
-    const currentAuthState = user ? AuthState.Authenticated : AuthState.Unauthenticated;
-    const [authState, setAuthState] = React.useState(currentAuthState);
+    const [authState, setAuthState] = React.useState(AuthState.Unauthenticated);
 
-    
+    React.useEffect(() => {
+      setAuthState(user ? AuthState.Authenticated : AuthState.Unauthenticated);
+    }, [user]);
+
+    function handleAuthChange(userName, newAuthState) {
+      if (newAuthState === AuthState.Authenticated) {
+        setUser(userName);
+      } else {
+        setUser(null);
+      }
+      setAuthState(newAuthState);
+    }
 
   return (
   <BrowserRouter>
@@ -38,7 +48,7 @@ export default function App() {
         
         <main>
             <Routes>
-                <Route path="/" element={<Login setUser={setUser} authState={authState} onAuthChange={setAuthState} />} />
+                <Route path="/" element={<Login userName={user} authState={authState} onAuthChange={handleAuthChange} />} />
                 <Route path="/play" element={<Play user={user} setGames={setGames} />} />
                 <Route path="/results" element={<Results user={user} games={games} />} />
                 <Route path="*" element={<div className="text-center">Page Not Found</div>} />

@@ -2,7 +2,7 @@ import React from 'react';
 import {serviceLoginUser} from '../service';
 import {MessageDialog} from './messageDialog';
 
-export function Unauthenticated({setUser}) {
+export function Unauthenticated({onLogin}) {
 
   const [Name, setName] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -26,7 +26,7 @@ export function Unauthenticated({setUser}) {
     });
     if (response?.status === 200) {
       localStorage.setItem('userName', Name);
-      props.onLogin(Name);
+      onLogin(Name);
     } else {
       const body = await response.json();
       setDisplayError(`⚠ Error: ${body.msg}`);
