@@ -103,12 +103,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
+- [x] **Node.js/Express HTTP service** - added a service.js file to run my backend through node
+- [x] **Static middleware for frontend** - added cookie parser and express.json middleware
+- [x] **Calls to third party endpoints** - call out to themealdbb api to get food names
+- [x] **Backend service endpoints** - had endpoints for login, create, logout, and storing games
+- [x] **Frontend calls service endpoints** - call out to my service when I log in, log out, or make a new user, and when a game is completed
+- [x] **Supports registration, login, logout, and restricted endpoint** - added registration, login, logout, functionality, and made it so you can't play without a cookie
 
 ## 🚀 DB deliverable
 
