@@ -4,10 +4,31 @@ import {serviceLoginUser} from '../service';
 export function Login({setUser}) {
 
   const [Name, setName] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  async function loginUser() {
+    loginOrCreate(`/api/auth/login`);
+  }
 
-  function loginUser() {
-      setUser(serviceLoginUser(Name));
+  async function createUser() {
+    loginOrCreate(`/api/auth/create`);
+  }
+
+  async function loginOrCreate(endpoint) {
+    const response = await fetch(endpoint, {
+      method: 'post',
+      body: JSON.stringify({ email: Name, password: password }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    });
+    if (response?.status === 200) {
+      localStorage.setItem('userName', Name);
+      props.onLogin(Name);
+    } else {
+      const body = await response.json();
+      setDisplayError(`⚠ Error: ${body.msg}`);
     }
+  }
 
 
 
@@ -17,10 +38,15 @@ export function Login({setUser}) {
         <h1>Welcome to BiteFight {Name}!</h1>
       <form>
         <div>
-          <span>Name</span>
+          <span>Username</span>
           <input type="text" placeholder="Your name"  onChange={(e) => setName(e.target.value)} />
         </div>
-        <button type="button" className="btn btn-dark" id="join" onClick={loginUser}>Join the fight</button>
+        <div>
+          <span>Password</span>
+          <input type="password" placeholder="Your password" onChange={(e) => setPassword(e.target.value)}/>
+        </div>
+        <button type="button" className="btn btn-dark" id="join" onClick={loginUser}>Login</button>
+        <button type="button" className="btn btn-dark" id="join" onClick={createUser}>Create Account</button>
       </form>
     </main>
   );
