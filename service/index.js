@@ -52,7 +52,6 @@ apiRouter.delete('/auth/logout', async (req, res) => {
   res.status(204).end();
 });
 
-
 const verifyAuth = async (req, res, next) => {
   const user = await findUser('token', req.cookies[authCookieName]);
   if (user) {
@@ -61,6 +60,15 @@ const verifyAuth = async (req, res, next) => {
     res.status(401).send({ msg: 'Unauthorized' });
   }
 };
+
+apiRouter.post('/score', verifyAuth, (req, res) => {
+  scores = [...scores, req.body];
+  res.send(scores);
+});
+
+apiRouter.get('/score', verifyAuth, (req, res) => {
+  res.send(scores);
+});
 
 async function createUser(email, password) {
   const passwordHash = await bcrypt.hash(password, 10);
@@ -84,9 +92,9 @@ async function findUser(field, value) {
 function setAuthCookie(res, authToken) {
   res.cookie(authCookieName, authToken, {
     maxAge: 1000 * 60 * 60 * 24 * 365,
-    secure: true,
+    secure: false, // secure false for localhost dev
     httpOnly: true,
-    sameSite: 'strict',
+    sameSite: 'lax',
   });
 }
 

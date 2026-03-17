@@ -1,5 +1,5 @@
 import React from 'react';
-import {serviceLoginUser} from '../service';
+
 import {MessageDialog} from './messageDialog';
 
 export function Unauthenticated({onLogin}) {
@@ -19,6 +19,7 @@ export function Unauthenticated({onLogin}) {
   async function loginOrCreate(endpoint) {
     const response = await fetch(endpoint, {
       method: 'post',
+      credentials: 'include',
       body: JSON.stringify({ email: Name, password: password }),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',

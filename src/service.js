@@ -9,48 +9,47 @@ export async function getRandomFood() {
     }
 
     const data = await response.json();
-    console.log('Fetched random food:', data.meals[0].strMeal);
-    return data.meals[0].strMeal; 
+    return data.meals[0].strMeal;
   } catch (error) {
     console.error('Failed to fetch random food:', error);
     return null;
   }
 }
 
-
-
-
-export function serviceLoginUser(Name) {
-    console.log(`login user with name: ${Name}`);
-
-    const users = JSON.parse((localStorage.getItem('users') || '[]'));
-    users.push({Name: Name});
-    const user = users.find(user => user.Name === Name);
-    localStorage.setItem('users', JSON.stringify(users));
-
-
-    if (user) {
-        console.log('Login successful');
-        console.log(user);
-        return user;
-    } else {
-        console.log('Login failed');
+export async function getGames() {
+  try {
+    const response = await fetch('/api/score', {
+      method: 'GET',
+      credentials: 'include',
+    });
+    if (!response.ok) {
+      console.error('Failed to fetch games from service', response.status);
+      return [];
     }
+    return await response.json();
+  } catch (error) {
+    console.error('Failed to fetch games', error);
+    return [];
+  }
 }
 
-
-export function serviceGame(food1, food2, vote1, vote2) {
-    const games = JSON.parse((localStorage.getItem('games') || '[]'));
-    const winner = vote1 > vote2 ? food1 : food2;
-    const game = {food1, food2, vote1, vote2, winner, date: new Date().toISOString()};
-    games.push(game);
-    localStorage.setItem('games', JSON.stringify(games));
-    console.log('Game recorded:', game);
-    
-    return games;
-}
-
-
-export function getGames() {
-    return JSON.parse((localStorage.getItem('games') || '[]'));
+export async function saveGame(game) {
+  try {
+    const response = await fetch('/api/score', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(game),
+    });
+    if (!response.ok) {
+      console.error('Failed to save game', response.status);
+      return null;
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Failed to save game', error);
+    return null;
+  }
 }
