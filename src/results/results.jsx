@@ -11,8 +11,14 @@ export function Results({games: propGames}) {
   console.log('Games data (props):', propGames);
 
   React.useEffect(() => {
-    setGames(getGames());
-  }, [propGames]);
+    getGamesData();
+  }, []);
+
+
+  async function getGamesData() {
+    games = await getGames();
+    setGames(games);
+  }
 
   return (
     <main className={styles.resultsPage}>
