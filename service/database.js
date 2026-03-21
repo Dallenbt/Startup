@@ -40,3 +40,19 @@ async function updateUserRemoveAuth(user) {
 async function addScore(score) {
   return scoreCollection.insertOne(score);
 }
+
+async function getScores() {
+    return scoreCollection.find({}).toArray();
+}
+
+
+
+module.exports = {
+  getUser,
+  getUserByToken,
+  addUser,
+  updateUser,
+  updateUserRemoveAuth,
+  addScore,
+  getScores,
+};
