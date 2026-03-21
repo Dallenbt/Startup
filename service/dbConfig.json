@@ -1,5 +1,5 @@
 {
-    "hostname": "cluster0.htzwhpi.mongodb.net",
+    "hostname": "ac-tlxzqme-shard-00-00.htzwhpi.mongodb.net:27017,ac-tlxzqme-shard-00-01.htzwhpi.mongodb.net:27017,ac-tlxzqme-shard-00-02.htzwhpi.mongodb.net:27017/?ssl=true&replicaSet=atlas-29h8nw-shard-0&authSource=admin&appName=Cluster0",
     "userName": "dallnthompson_db_user",
     "password": "jK9j958MoEqhND88"
 }

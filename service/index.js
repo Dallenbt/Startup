@@ -61,11 +61,12 @@ const verifyAuth = async (req, res, next) => {
 };
 
 apiRouter.post('/score', verifyAuth, async (req, res) => {
-  const scores = await DB.getScores();;
-  res.send(scores);
+  await DB.addScore(req.body);
+  res.send({ msg: 'Score added' });
 });
 
-apiRouter.get('/score', verifyAuth, (req, res) => {
+apiRouter.get('/score', verifyAuth, async (req, res) => {
+  const scores = await DB.getScores();
   res.send(scores);
 });
 
@@ -77,7 +78,7 @@ async function createUser(email, password) {
     password: passwordHash,
     token: uuid.v4(),
   };
-  await DB.adduser(user);
+  await DB.addUser(user);
 
   return user;
 }
