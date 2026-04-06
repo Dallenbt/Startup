@@ -18,6 +18,7 @@ export function Play({ user, authState, currentRound, notification, socket }) {
     return () => clearInterval(interval);
   }, [currentRound]);
 
+  
   function vote(choice) {
     setLocalNotification(`${user} voted`);
     if (!socket || socket.readyState !== WebSocket.OPEN || !currentRound) {
