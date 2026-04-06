@@ -114,8 +114,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Stores data in MongoDB** - I did not complete this part of the deliverable.
-- [ ] **Stores credentials in MongoDB** - I did not complete this part of the deliverable.
+- [x] **Stores data in MongoDB** -I store my users and past results in my MongoDB
+- [x] **Stores credentials in MongoDB** - I call off to my MongoDB to get and display past results and players usernames
 
 ## 🚀 WebSocket deliverable
 
