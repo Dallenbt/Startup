@@ -16,6 +16,7 @@ export default function App() {
   const [notification, setNotification] = React.useState('');
   const [socket, setSocket] = React.useState(null);
   const socketRef = React.useRef(null);
+  
 
   React.useEffect(() => {
     setAuthState(user ? AuthState.Authenticated : AuthState.Unauthenticated);
