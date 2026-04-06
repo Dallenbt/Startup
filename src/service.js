@@ -51,6 +51,7 @@ export async function getGames() {
   }
 }
 
+
 export async function saveGame(game) {
   try {
     const response = await fetch('/api/score', {
@@ -66,7 +67,8 @@ export async function saveGame(game) {
       return null;
     }
     return await response.json();
-  } catch (error) {
+  } 
+  catch (error) {
     console.error('Failed to save game', error);
     return null;
   }
