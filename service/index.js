@@ -1,27 +1,113 @@
+const http = require('http');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const express = require('express');
 const uuid = require('uuid');
-const app = express();
+const { WebSocketServer } = require('ws');
 const DB = require('./database.js');
 
 const authCookieName = 'token';
-
-
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
+const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static('public'));
 
+let currentRound = null;
+let roundClosing = false;
+let heartbeatInterval = null;
+
+async function fetchRandomFood() {
+  try {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+    const payload = await response.json();
+    return payload?.meals?.[0]?.strMeal || `Food ${Math.ceil(Math.random() * 100)}`;
+  } catch (error) {
+    console.warn('Unable to fetch random food, using fallback:', error.message);
+    return `Food ${Math.ceil(Math.random() * 100)}`;
+  }
+}
+
+async function makeRound(lastWinner = '') {
+  const food1 = await fetchRandomFood();
+  let food2 = await fetchRandomFood();
+  if (food1 === food2) {
+    food2 = `${food2} 2`;
+  }
+
+  const startedAt = Date.now();
+  const endsAt = startedAt + 30 * 1000;
+
+  return {
+    id: uuid.v4(),
+    food1,
+    food2,
+    vote1: 0,
+    vote2: 0,
+    startedAt,
+    endsAt,
+    lastWinner,
+  };
+}
+
+function broadcast(wss, data) {
+  const payload = JSON.stringify(data);
+  wss.clients.forEach((client) => {
+    if (client.readyState === client.OPEN) {
+      client.send(payload);
+    }
+  });
+}
+
+async function finishRound(wss) {
+  if (!currentRound) return;
+  const { food1, food2, vote1, vote2 } = currentRound;
+  const winnerFood = vote1 >= vote2 ? food1 : food2;
+
+  const newGame = {
+    food1,
+    food2,
+    vote1,
+    vote2,
+    winner: winnerFood,
+    date: new Date().toISOString(),
+  };
+
+  await DB.addScore(newGame);
+  broadcast(wss, { type: 'newGame', game: newGame });
+
+  const nextRound = await makeRound(winnerFood);
+  currentRound = nextRound;
+  broadcast(wss, { type: 'round', round: currentRound });
+}
+
+function startRoundChecker(wss) {
+  setInterval(async () => {
+    if (roundClosing || !currentRound) return;
+    if (Date.now() >= currentRound.endsAt) {
+      roundClosing = true;
+      try {
+        await finishRound(wss);
+      } catch (error) {
+        console.error('Error finishing round:', error);
+      } finally {
+        roundClosing = false;
+      }
+    }
+  }, 1000);
+}
+
 var apiRouter = express.Router();
-app.use(`/api`, apiRouter);
+app.use('/api', apiRouter);
 
 apiRouter.post('/auth/create', async (req, res) => {
   if (await findUser('email', req.body.email)) {
     res.status(409).send({ msg: 'Existing user' });
   } else {
     const user = await createUser(req.body.email, req.body.password);
-
     setAuthCookie(res, user.token);
     res.send({ email: user.email });
   }
@@ -41,7 +127,6 @@ apiRouter.post('/auth/login', async (req, res) => {
   res.status(401).send({ msg: 'Unauthorized' });
 });
 
-
 apiRouter.delete('/auth/logout', async (req, res) => {
   const user = await findUser('token', req.cookies[authCookieName]);
   if (user) {
@@ -59,6 +144,10 @@ const verifyAuth = async (req, res, next) => {
     res.status(401).send({ msg: 'Unauthorized' });
   }
 };
+
+apiRouter.get('/current-round', async (req, res) => {
+  res.send(currentRound || {});
+});
 
 apiRouter.post('/score', verifyAuth, async (req, res) => {
   await DB.addScore(req.body);
@@ -101,6 +190,54 @@ function setAuthCookie(res, authToken) {
   });
 }
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+const server = http.createServer(app);
+const wss = new WebSocketServer({ server, path: '/ws' });
+
+wss.on('connection', (socket) => {
+  socket.isAlive = true;
+  if (currentRound) {
+    socket.send(JSON.stringify({ type: 'round', round: currentRound }));
+  }
+
+  socket.on('message', async (data) => {
+    try {
+      const payload = JSON.parse(data.toString());
+      if (!currentRound) return;
+
+      if (payload.type === 'vote') {
+        if (payload.choice === 1) {
+          currentRound.vote1 += 1;
+          broadcast(wss, { type: 'notification', message: `${payload.user || 'Someone'} voted for ${currentRound.food1}` });
+        } else if (payload.choice === 2) {
+          currentRound.vote2 += 1;
+          broadcast(wss, { type: 'notification', message: `${payload.user || 'Someone'} voted for ${currentRound.food2}` });
+        }
+        broadcast(wss, { type: 'round', round: currentRound });
+      }
+    } catch (error) {
+      console.warn('Invalid WebSocket message', error);
+    }
+  });
+
+  socket.on('pong', () => {
+    socket.isAlive = true;
+  });
 });
+
+heartbeatInterval = setInterval(() => {
+  wss.clients.forEach((client) => {
+    if (!client.isAlive) {
+      return client.terminate();
+    }
+    client.isAlive = false;
+    client.ping();
+  });
+}, 10000);
+
+(async function initialize() {
+  currentRound = await makeRound('');
+  startRoundChecker(wss);
+  server.listen(port, () => {
+    console.log(`Listening on port ${port}`);
+  });
+})();

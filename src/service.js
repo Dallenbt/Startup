@@ -16,6 +16,23 @@ export async function getRandomFood() {
   }
 }
 
+export async function getCurrentRound() {
+  try {
+    const response = await fetch('/api/current-round', {
+      method: 'GET',
+      credentials: 'include',
+    });
+    if (!response.ok) {
+      console.error('Failed to fetch current round', response.status);
+      return null;
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Failed to fetch current round', error);
+    return null;
+  }
+}
+
 export async function getGames() {
   try {
     const response = await fetch('/api/score', {

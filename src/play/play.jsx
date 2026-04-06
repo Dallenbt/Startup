@@ -1,111 +1,77 @@
 import React from 'react';
-import { getRandomFood, saveGame } from '../service';
 import { AuthState } from '../login/authState';
 
-export function Play({ user, setGames, authState }) {
-  const [food1, setFood1] = React.useState('');
-  const [food2, setFood2] = React.useState('');
-  const [vote1, setVote1] = React.useState(0);
-  const [vote2, setVote2] = React.useState(0);
-  const [timeLeft, setTimeLeft] = React.useState(30);
-  const [notification, setNotification] = React.useState('');
-  const [winner, setWinner] = React.useState('');
-
-  async function fetchFoodPair() {
-    const randomFood1 = await getRandomFood();
-    const randomFood2 = await getRandomFood();
-    setFood1(randomFood1 || 'Food A');
-    setFood2(randomFood2 || 'Food B');
-  }
+export function Play({ user, authState, currentRound, notification, socket }) {
+  const [timeLeft, setTimeLeft] = React.useState(0);
+  const [localNotification, setLocalNotification] = React.useState('');
 
   React.useEffect(() => {
-    fetchFoodPair();
-  }, []);
+    if (!currentRound) return undefined;
 
-  React.useEffect(() => {
-    if (authState !== AuthState.Authenticated) return;
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => (prev <= 1 ? 0 : prev - 1));
-    }, 1000);
-    return () => clearInterval(timer);
-  }, [authState]);
-
-  React.useEffect(() => {
-    if (timeLeft !== 0) return;
-
-    async function finishRound() {
-      if (vote1 > 0 || vote2 > 0) {
-        const winnerFood = vote1 >= vote2 ? food1 : food2;
-        const newGame = {
-          food1,
-          food2,
-          vote1,
-          vote2,
-          winner: winnerFood,
-          date: new Date().toISOString(),
-          user,
-        };
-
-        const savedGames = await saveGame(newGame);
-        if (savedGames) {
-          setGames(savedGames);
-        }
-
-        setWinner(winnerFood);
-      }
-      setVote1(0);
-      setVote2(0);
-      setNotification('');
-      await fetchFoodPair();
-      setTimeLeft(30);
+    function updateTime() {
+      const remaining = Math.max(0, Math.ceil((currentRound.endsAt - Date.now()) / 1000));
+      setTimeLeft(remaining);
     }
 
-    finishRound();
-  }, [timeLeft, vote1, vote2, food1, food2, user, setGames]);
+    updateTime();
+    const interval = setInterval(updateTime, 250);
+    return () => clearInterval(interval);
+  }, [currentRound]);
+
+  function vote(choice) {
+    setLocalNotification(`${user} voted`);
+    if (!socket || socket.readyState !== WebSocket.OPEN || !currentRound) {
+      setLocalNotification('Unable to send vote yet. Refresh the page if this persists.');
+      return;
+    }
+
+    socket.send(JSON.stringify({ type: 'vote', choice, user }));
+  }
 
   if (authState !== AuthState.Authenticated) {
     return <main>Please log in to play.</main>;
   }
 
+  if (!currentRound) {
+    return <main>Connecting to game server...</main>;
+  }
+
   return (
     <main>
       <h1>Time to Fight!</h1>
-      <p className="alert alert-success notif">Last Winner: {winner}</p>
+      <p className="alert alert-success notif">Last Winner: {currentRound.lastWinner || 'None yet'}</p>
       <h2>Time left to vote: {timeLeft}</h2>
-      <p className="alert alert-info notif">{notification}</p>
+      <p className="alert alert-info notif">{notification || localNotification}</p>
       <section className="play-main">
         <article className="food-card">
-          <h3>{food1}</h3>
-          <p>{food1} Votes: {vote1}</p>
-          <img src="/glove-removebg-preview.png" alt={food1} className="food-image" />
+          <h3>{currentRound.food1}</h3>
+          <p>{currentRound.food1} Votes: {currentRound.vote1}</p>
+          <img src="/glove-removebg-preview.png" alt={currentRound.food1} className="food-image" />
           <button
             className="btn btn-dark voter"
-            onClick={() => {
-              setVote1((prev) => prev + 1);
-              setNotification(`${user} voted for ${food1}`);
-            }}
+            disabled={timeLeft === 0}
+            onClick={() => vote(1)}
           >
-            Vote {food1}
+            Vote {currentRound.food1}
           </button>
         </article>
 
         <h1 className="vs" id="playVS">VS</h1>
 
         <article className="food-card">
-          <h3>{food2}</h3>
-          <p>{food2} Votes: {vote2}</p>
-          <img src="/glove-removebg-preview.png" alt={food2} className="food-image" />
+          <h3>{currentRound.food2}</h3>
+          <p>{currentRound.food2} Votes: {currentRound.vote2}</p>
+          <img src="/glove-removebg-preview.png" alt={currentRound.food2} className="food-image" />
           <button
             className="btn btn-dark voter"
-            onClick={() => {
-              setVote2((prev) => prev + 1);
-              setNotification(`${user} voted for ${food2}`);
-            }}
+            disabled={timeLeft === 0}
+            onClick={() => vote(2)}
           >
-            Vote {food2}
+            Vote {currentRound.food2}
           </button>
         </article>
       </section>
     </main>
   );
 }
+
