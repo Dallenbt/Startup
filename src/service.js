@@ -33,6 +33,7 @@ export async function getCurrentRound() {
   }
 }
 
+
 export async function getGames() {
   try {
     const response = await fetch('/api/score', {
